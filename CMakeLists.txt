@@ -6,12 +6,17 @@ project(minesweeperizer)
 set(CMAKE_CXX_STANDARD 17)
 
 set(SOURCE
-        src/helpers/texture.cpp)
+        src/application.cc
+        src/helpers/texture.cc)
 
 add_executable(minesweeperizer
         ${SOURCE}
 
         src/main.cpp)
+
+target_include_directories(minesweeperizer
+        PRIVATE
+        lib/cxxopts/include)
 
 find_package(OpenCV REQUIRED)
 find_package(SDL2 REQUIRED)
