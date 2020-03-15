@@ -1,6 +1,8 @@
 # Minesweeperizer
 
-Turn a video into a minesweeper.
+Turn a video into minesweeper.
+
+Inspired from [Bad Apple!! Minesweeper](https://www.youtube.com/watch?v=im-BHeo20Co) YouTube video
 
 ## Compile Instruction
 
