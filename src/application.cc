@@ -149,9 +149,11 @@ void Application::dispatch()
 		{
 			for (int rect_center_x = pixel_size, x_idx = 0; rect_center_x < frame.cols; rect_center_x += pixel_size * 2, x_idx++)
 			{
-				cv::Vec3b color = frame.at<cv::Vec3b>(rect_center_y, rect_center_x);
+				cv::Vec3b current_pixel_color = frame.at<cv::Vec3b>(rect_center_y, rect_center_x);
+				cv::Vec3b output;
+				cv::absdiff(current_pixel_color, green_screen_color, output);
 
-				if (cv::norm(color - green_screen_color) < color_tolerance)
+				if (cv::norm(output) < color_tolerance)
 				{
 					minefield[y_idx][x_idx] = Field::Unclicked;
 				}
@@ -370,9 +372,8 @@ void Application::dispatch()
 			{
 				texture_rectangle.w = pixel_size * 2;
 				texture_rectangle.h = pixel_size * 2;
-				texture_rectangle.x = (2 * pixel_size * x_idx);
-				texture_rectangle.y = (2 * pixel_size * y_idx);
-
+				texture_rectangle.x = pixel_size * 2 * x_idx;
+				texture_rectangle.y = pixel_size * 2 * y_idx;
 
 				if (minefield[y_idx][x_idx] == Field::Clicked)
 				{
